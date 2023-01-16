@@ -6,15 +6,21 @@
 		background-color: $mainDarkColor;
 		color: #fff;
 	}
+
+	// .header__body
+	&__body {}
 }
 
 .top-header {
+	/* Отступ безопасности для top-header = 70px (10px + (min-height: 50px) + 10px) */
+	padding: 10px 0px;
 
 	// .top-header__container
 	&__container {
 		display: flex;
 		align-items: center;
 		gap: 20px;
+		min-height: 50px;
 	}
 
 	// .top-header__menu
@@ -23,9 +29,22 @@
 	}
 
 	// .top-header__user
-	&__user {}
+	&__user {
+		display: inline-flex;
+		align-items: center;
+		font-weight: 600;
+		/* line-height: 22px; font-size: 18px; */
+		line-height: math.div(22, 18);
+
+		&::before {
+			font-size: rem(28);
+			/* отступ справа: 15px; высота иконки (шрифта): 28px; */
+			margin-right: em(15, 28);
+		}
+	}
 }
 
+//===================================================================================================
 .menu {
 
 	// .menu__body
@@ -34,8 +53,10 @@
 	// .menu__list
 	&__list {
 		display: flex;
-		gap: 60px;
-		@include adaptiv-value("gap", 60, 20);
+		flex-wrap: wrap;
+		row-gap: 5px;
+		/* ширина gap меняется от 60px до 20px */
+		@include adaptiv-value("column-gap", 60, 20);
 	}
 
 	// .menu__item
@@ -44,13 +65,70 @@
 	// .menu__link
 	&__link {
 		font-size: rem(16);
+		line-height: math.div(20, 16);
+		/* line-height: 20px; font-size: 16px; */
 	}
 }
 
-.icon-menu {}
+//===================================================================================================
+.body-header {
+	/* Отступ безопасности для body-header = 90px (10px + (min-height: 70px) + 10px) */
+	padding: 10px 0px;
+	background-color: #ECF1F2;
+
+	// .body-header__container
+	&__container {
+		display: flex;
+		min-height: 70px;
+		align-items: center;
+	}
+
+	// .body-header__logo
+	&__logo {
+		@extend %ic;
+		@extend ._icon-logo;
+		font-size: rem(42);
+		color: $mainDarkColor;
+	}
+
+	// .body-header__search
+	&__search {}
+}
+
+.search-header {
+	background-color: rgba(7, 7, 7, 0.03);
+	border-radius: 3px;
+	position: relative;
+	border: 1px solid rgba(4, 4, 4, 0.5);
+
+	// .search-header__button
+	&__button {
+		position: absolute;
+		background-color: transparent;
+		height: 41px;
+		width: 41px;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		top: 0;
+		left: 8px;
+	}
+
+	// .search-header__input
+	&__input {
+		background-color: transparent;
+		height: 41px;
+		border-radius: 3px;
+		color: $mainColor;
+		padding: 0px 20px 0px 50px;
+
+		&::placeholder {
+			color: rgba(0, 0, 0, 0.5);
+		}
+	}
+}
 
 //====================================================================================================
-
 //Burger
 
 .icon-menu {
@@ -59,7 +137,8 @@
 	@media (max-width: $mobile) {
 		display: block;
 		position: relative;
-		width: 30px;
+		/* ширина бургера (флекс-элемент) вместо width: 30px; указываем flex: 0 0 30px; */
+		flex: 0 0 30px;
 		height: 18px;
 		cursor: pointer;
 		z-index: 5;
