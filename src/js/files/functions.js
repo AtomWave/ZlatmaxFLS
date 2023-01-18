@@ -15,7 +15,26 @@ export function isWebp() {
 	});
 }
 /* Проверка мобильного браузера */
-export let isMobile = { Android: function () { return navigator.userAgent.match(/Android/i); }, BlackBerry: function () { return navigator.userAgent.match(/BlackBerry/i); }, iOS: function () { return navigator.userAgent.match(/iPhone|iPad|iPod/i); }, Opera: function () { return navigator.userAgent.match(/Opera Mini/i); }, Windows: function () { return navigator.userAgent.match(/IEMobile/i); }, any: function () { return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows()); } };
+export let isMobile = {
+	Android: function () {
+		return navigator.userAgent.match(/Android/i);
+	},
+	BlackBerry: function () {
+		return navigator.userAgent.match(/BlackBerry/i);
+	},
+	iOS: function () {
+		return navigator.userAgent.match(/iPhone|iPad|iPod/i);
+	},
+	Opera: function () {
+		return navigator.userAgent.match(/Opera Mini/i);
+	},
+	Windows: function () {
+		return navigator.userAgent.match(/IEMobile/i);
+	},
+	any: function () {
+		return (isMobile.Android() || isMobile.BlackBerry() || isMobile.iOS() || isMobile.Opera() || isMobile.Windows());
+	}
+};
 /* Добавление класса touch для HTML если браузер мобильный */
 export function addTouchClass() {
 	// Добавление класса _touch для HTML если браузер мобильный
@@ -31,7 +50,9 @@ export function addLoadedClass() {
 }
 // Получение хеша в адресе сайта
 export function getHash() {
-	if (location.hash) { return location.hash.replace('#', ''); }
+	if (location.hash) {
+		return location.hash.replace('#', '');
+	}
 }
 // Указание хеша в адресе сайта
 export function setHash(hash) {
@@ -42,6 +63,7 @@ export function fullVHfix() {
 	const fullScreens = document.querySelectorAll('[data-fullscreen]');
 	if (fullScreens.length && isMobile.any()) {
 		window.addEventListener('resize', fixHeight);
+
 		function fixHeight() {
 			let vh = window.innerHeight * 0.01;
 			document.documentElement.style.setProperty('--vh', `${vh}px`);
@@ -169,7 +191,7 @@ export let bodyLock = (delay = 500) => {
 data-spollers="992,max" - спойлеры будут работать только на экранах меньше или равно 992px
 data-spollers="768,min" - спойлеры будут работать только на экранах больше или равно 768px
 
-Если нужно что бы в блоке открывался болько один слойлер добавляем атрибут data-one-spoller
+Если нужно что бы в блоке открывался болько один спойлер добавляем атрибут data-one-spoller
 */
 export function spollers() {
 	const spollersArray = document.querySelectorAll('[data-spollers]');
@@ -178,15 +200,15 @@ export function spollers() {
 		const spollersRegular = Array.from(spollersArray).filter(function (item, index, self) {
 			return !item.dataset.spollers.split(",")[0];
 		});
-		// Инициализация обычных слойлеров
+		// Инициализация обычных спойлеров
 		if (spollersRegular.length > 0) {
 			initSpollers(spollersRegular);
 		}
-		// Получение слойлеров с медиа запросами
+		// Получение спойлеров с медиа запросами
 		const spollersMedia = Array.from(spollersArray).filter(function (item, index, self) {
 			return item.dataset.spollers.split(",")[0];
 		});
-		// Инициализация слойлеров с медиа запросами
+		// Инициализация спойлеров с медиа запросами
 		if (spollersMedia.length > 0) {
 			const breakpointsArray = [];
 			spollersMedia.forEach(item => {
@@ -256,6 +278,7 @@ export function spollers() {
 				});
 			}
 		}
+
 		function setSpollerAction(e) {
 			const el = e.target;
 			if (el.hasAttribute('data-spoller') || el.closest('[data-spoller]')) {
@@ -272,6 +295,7 @@ export function spollers() {
 				e.preventDefault();
 			}
 		}
+
 		function hideSpollersBody(spollersBlock) {
 			const spollerActiveTitle = spollersBlock.querySelector('[data-spoller]._spoller-active');
 			if (spollerActiveTitle) {
@@ -404,6 +428,7 @@ export function tabs() {
 			});
 		}
 	}
+
 	function setTabsStatus(tabsBlock) {
 		const tabsTitles = tabsBlock.querySelectorAll('[data-tabs-title]');
 		const tabsContent = tabsBlock.querySelectorAll('[data-tabs-item]');
@@ -435,6 +460,7 @@ export function tabs() {
 			});
 		}
 	}
+
 	function setTabsAction(e) {
 		const el = e.target;
 		if (el.closest('[data-tabs-title]') || el.hasAttribute('[data-tabs-title]')) {
