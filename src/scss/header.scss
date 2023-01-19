@@ -209,7 +209,7 @@
 		top: 100%;
 		width: 100%;
 		left: 0;
-		margin: rem(3) 0px 0px 0px;
+		margin: rem(5) 0px 0px 0px;
 		background-color: #fff;
 		padding: rem(15);
 		border-radius: rem(3);
@@ -223,7 +223,12 @@
 	}
 
 	// .phones-header__calback
-	&__calback {}
+	&__calback {
+		margin: rem(3) 0px 0px 0px;
+		color: #E8AA31;
+		line-height: math.div(22, 18);
+		font-weight: 700;
+	}
 }
 
 .cart-header {

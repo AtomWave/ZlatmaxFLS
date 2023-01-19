@@ -1,6 +1,9 @@
 // Общий файл элементов форм
 // Для подключения/отключения стилей конкретного єлемента формы смотри base/forms/forms.scss
-// @import "base/forms/forms";
+@import "base/forms/forms";
+
+// Стили попапов
+@import "base/popup";
 
 // Стили спойлеров
 // @import "base/spollers";
@@ -11,21 +14,19 @@
 // Стили карт
 // @import "base/maps";
 
-// Стили для полноєкранного блока
-[data-fullscreen] {
-	height: 100vh;
-	.touch & {
-		height: calc(var(--vh, 1vh) * 100);
-		@media (max-width: $mobile) {
-			transition: height 0.2s;
-		}
-	}
-}
+// Стили блока "показать еще"
+// @import "base/showmore";
+
+// Стили для полноэкранного блока
+// @import "base/fullscreen";
+
+// Стили для липкого блока
+// @import "base/sticky";
 
 // Стили для отзывчивых картинок (IBG)
 // Сниппет (HTML): ibg (div c картинкой и классами)
 // Сниппет (HTML): ibga (a c картинкой и классами)
-[class*="__image-ibg"] {
+[class*="-ibg"] {
 	position: relative;
 	img {
 		position: absolute;
@@ -34,6 +35,11 @@
 		top: 0;
 		left: 0;
 		object-fit: cover;
+	}
+}
+[class*="-ibg_contain"] {
+	img {
+		object-fit: contain;
 	}
 }
 
