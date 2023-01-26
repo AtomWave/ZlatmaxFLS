@@ -89,7 +89,7 @@
 //===================================================================================================
 .body-header {
 	/* Отступ безопасности для body-header = 90px (10px + (min-height: 70px) + 10px) */
-	padding: rem(10) 0px;
+	padding: rem(10) 0;
 	background-color: #ecf1f2;
 
 	// .body-header__container
@@ -111,7 +111,7 @@
 	&__search {
 		padding-right: rem(20);
 		flex: 1 1 auto;
-		@include adaptiv-value("padding-left", 150, 20);
+		@include adaptiv-value("padding-left", 158, 20, 1620, 1400, 1);
 	}
 
 	// .body-header__actions
@@ -267,6 +267,7 @@
 
 .cart-header {
 	display: flex;
+	align-items: center;
 	column-gap: rem(15);
 	// .cart-header__icon
 	&__icon {
@@ -387,32 +388,30 @@
 	}
 }
 .sub-menu-catalog {
-	// .sub-menu-catalog__blok
-	&__blok {
-		padding-bottom: rem(30);
+	// .sub-menu-catalog__block
+	&__block {
 		display: none;
+		@for $var from 1 to 6 {
+			&_#{$var} {
+				grid-template-columns: repeat($var, minmax(auto, rem(320)));
+			}
+		}
 		&._sub-menu-open {
-			display: flex;
+			display: grid;
 		}
 	}
 
 	// .sub-menu-catalog__container
 	&__container {
-		padding: 0;
+		padding: 0px rem(10);
 	}
 
-	// .sub-menu-catalog__column
-	&__column {
-		flex: 0 1 rem(320);
-		display: flex;
-		flex-direction: column;
-	}
 	// .sub-menu-catalog__category
 	&__category {
 		font-size: rem(16);
 		line-height: math.div(20, 16);
 		font-weight: 700;
-		padding: rem(30) rem(10);
+		padding: rem(30) rem(15) rem(30) 0;
 		@media (any-hover: hover) {
 			&:hover {
 				text-decoration: underline;
@@ -421,11 +420,10 @@
 	}
 	// .sub-menu-catalog__list
 	&__list {
-		flex: 1 1 auto;
 		display: flex;
 		flex-direction: column;
 		gap: rem(20);
-		padding: rem(30) rem(10);
+		padding: rem(30) rem(15) rem(30) 0;
 		border-top: 1px solid rgba(255, 255, 255, 0.3);
 		border-bottom: 1px solid rgba(255, 255, 255, 0.3);
 	}
@@ -442,12 +440,16 @@
 			}
 		}
 	}
+
+	// .sub-menu-catalog__footer
+	&__footer {
+		display: flex;
+		padding: rem(30) rem(12);
+	}
+
 	// .sub-menu-catalog__all
 	&__all {
 		align-self: flex-start;
-		padding-top: rem(30);
-		padding-left: rem(22);
-		padding-right: rem(10);
 		font-size: rem(16);
 		color: $mainOrange;
 		@media (any-hover: hover) {
