@@ -266,7 +266,7 @@
 		"body": [
 			"z-index: ${1:1};"
 		],
-		"description": "z-index"
+		"description": "z-index"menu
 	},
 	"avv": {
 		"prefix": "avv",
