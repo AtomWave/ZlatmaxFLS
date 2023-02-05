@@ -817,6 +817,13 @@
 		],
 		"description": "fbc"
 	},
+	"fbjc": {
+		"prefix": "fbjc",
+		"body": [
+			"display: flex;justify-content:center;align-items: center;"
+		],
+		"description": "fbc"
+	},
 	"lcm": {
 		"prefix": "lcm",
 		"body": [
