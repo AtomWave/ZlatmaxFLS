@@ -24,6 +24,9 @@
 		align-items: center;
 		gap: rem(20);
 		min-height: rem(50);
+		@media (max-width: $tablet) {
+			gap: rem(30);
+		}
 	}
 
 	// .top-header__menu
@@ -33,22 +36,32 @@
 
 	// .top-header__user
 	&__user {
+		position: relative;
+		z-index: 5;
 		display: inline-flex;
 		align-items: center;
 		font-weight: 600;
 		/* line-height: 22px; font-size: 18px; */
 		line-height: math.div(22, 18);
+		/* отступ справа: 15px; высота иконки (шрифта): 28px; */
+		gap: em(15, 18);
 
 		&::before {
 			font-size: rem(28);
-			/* отступ справа: 15px; высота иконки (шрифта): 28px; */
-			margin-right: em(15, 28);
 		}
 		@media (any-hover: hover) {
 			&:hover {
 				span {
 					text-decoration: underline;
 				}
+			}
+		}
+		@media (max-width: $tablet) {
+			&::before {
+				font-size: rem(35);
+			}
+			span {
+				display: none;
 			}
 		}
 	}
@@ -62,7 +75,7 @@
 		@include adaptiv-value("column-gap", 60, 20);
 		@media (max-width: $tablet) {
 			flex-direction: column;
-			row-gap: 15px;
+			row-gap: 25px;
 		}
 	}
 
@@ -100,10 +113,10 @@
 			}
 		}
 		@media (max-width: $tablet) {
-			@include adaptiv-value("font-size", 30, 18, 992, 320, 1);
+			@include adaptiv-value("font-size", 30, 20, 992, 320, 1);
 		}
 	}
-	@media (max-width:$tablet){
+	@media (max-width: $tablet) {
 		display: none;
 	}
 }
@@ -119,8 +132,25 @@
 			left: -100%;
 			overflow: auto;
 			background-color: $mainDarkColor;
-			padding: rem(80) rem(15) rem(50) rem(15);
+			padding: rem(100) rem(15) rem(50) rem(15);
 			z-index: 4;
+			&::before{
+				content:'';
+				position: fixed;
+				width: 100%;
+				height: 70px;
+				left: -100%;
+				top: 0;
+				background-color: $mainDarkColor;
+			}
+			transition: left 0.3s ease 0s;
+			.menu-open & {
+				left: 0;
+				&::before{
+					content:'';
+					left: 0;
+				}
+			}
 		}
 	}
 	@media (max-width: $tablet) {
@@ -141,6 +171,9 @@
 		display: flex;
 		min-height: rem(70);
 		align-items: center;
+		@media (max-width: $tablet) {
+			justify-content: space-between;
+		}
 	}
 
 	// .body-header__logo
@@ -153,9 +186,13 @@
 
 	// .body-header__search
 	&__search {
-		padding-right: rem(20);
 		flex: 1 1 auto;
-		@include adaptiv-value("padding-left", 158, 20, 1620, 1200, 1);
+		@media (min-width: $tablet) {
+			padding-right: rem(20);
+		}
+		@media (min-width: $mobileSmall) {
+			@include adaptiv-value("padding-left", 158, 20, 1620, 1200, 1);
+		}
 	}
 
 	// .body-header__actions
@@ -165,12 +202,13 @@
 
 //===================================================================================================
 .search-header {
-	max-width: rem(377);
 	background-color: rgba(7, 7, 7, 0.03);
 	border-radius: rem(3);
 	position: relative;
 	border: 1px solid rgba(4, 4, 4, 0.5);
-
+	@media (min-width: $tablet) {
+		max-width: rem(377);
+	}
 	// .search-header__button
 	&__button {
 		position: absolute;
@@ -199,6 +237,9 @@
 			color: rgba(0, 0, 0, 0.5);
 		}
 	}
+	@media (max-width: $mobileSmall) {
+		background-color: #fff;
+	}
 }
 
 //===================================================================================================
@@ -206,6 +247,9 @@
 .actions-header {
 	display: flex;
 	align-items: center;
+	@media (max-width: $tablet) {
+		display: none;
+	}
 	@include adaptiv-value("column-gap", 30, 20, 1620, 1000, 1);
 
 	// .actions-header__location
@@ -236,6 +280,8 @@
 
 	// .actions-header__favorite
 	&__favorite {
+		position: relative;
+		z-index: 5;
 		font-size: rem(27);
 	}
 
@@ -246,6 +292,8 @@
 }
 
 .phones-header {
+	position: relative;
+	z-index: 5;
 	// .phones-header__items
 	&__items {
 	}
@@ -262,6 +310,23 @@
 		white-space: nowrap;
 		/* line-height: 22px; font-size: 18px; */
 		line-height: math.div(22, 18);
+		&::before {
+			@extend %ic;
+			@extend ._icon-footer-phone;
+			display: none;
+		}
+		@media (max-width: $tablet) {
+			font-size: rem(23);
+		}
+		@media (max-width: $mobileSmall) {
+			&::before {
+				display: block;
+				font-size: rem(30);
+			}
+			span {
+				display: none;
+			}
+		}
 	}
 
 	// .phones-header__arrow
@@ -274,6 +339,9 @@
 		// вращаем стрелку при активации
 		&._spoller-active {
 			transform: rotate(-180deg);
+		}
+		@media (max-width: $tablet) {
+			display: none;
 		}
 	}
 
@@ -295,6 +363,9 @@
 				margin-bottom: em(8, 18);
 			}
 		}
+		@media (max-width: $tablet) {
+			display: none;
+		}
 	}
 
 	// .phones-header__calback
@@ -308,14 +379,18 @@
 				text-decoration: underline;
 			}
 		}
+		@media (max-width: $tablet) {
+			display: none;
+		}
 	}
 }
 
 .cart-header {
 	display: flex;
-	// 2:25:30
 	align-items: center;
 	column-gap: rem(15);
+	position: relative;
+	z-index: 5;
 	// .cart-header__icon
 	&__icon {
 		flex: 0 0 rem(37);
@@ -378,6 +453,9 @@
 	// .catalog-header__menu
 	&__menu {
 	}
+	@media (max-width: $mobileSmall) {
+		padding: rem(20) 0;
+	}
 }
 .menu-catalog {
 	// .menu-catalog__list
@@ -435,6 +513,14 @@
 		left: 0;
 		top: 100%;
 		background-color: $mainDarkColor;
+	}
+	@media (max-width: $tablet) {
+		position: fixed;
+		top: 0;
+		left: -100%;
+		width: 100%;
+		height: 100%;
+		overflow: auto;
 	}
 }
 .sub-menu-catalog {
@@ -519,8 +605,8 @@
 		position: relative;
 		/* ширина бургера (флекс-элемент) вместо width: 30px; указываем flex: 0 0 30px; */
 		// flex: 0 0 30px;
-		width: 30px;
-		height: 18px;
+		width: 40px;
+		height: 22.5px;
 		cursor: pointer;
 		z-index: 5;
 		span,
