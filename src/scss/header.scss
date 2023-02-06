@@ -100,13 +100,15 @@
 		}
 		&_catalog {
 			display: flex;
+			align-items: center;
 			flex-direction: row-reverse;
 			justify-content: space-between;
 			&::before {
 				display: flex;
 				justify-content: center;
 				align-items: center;
-				transform: rotate(-90deg);
+				// translateY(-2px) - поднимем стрелочку на 2px (но я бы не поднимал)
+				transform: translateY(-2px) rotate(-90deg);
 				flex: 0 0 14px;
 				height: 14px;
 				font-size: rem(8);
@@ -133,9 +135,10 @@
 			overflow: auto;
 			background-color: $mainDarkColor;
 			padding: rem(100) rem(15) rem(50) rem(15);
+			transition: left 0.3s ease 0s;
 			z-index: 4;
-			&::before{
-				content:'';
+			&::before {
+				content: "";
 				position: fixed;
 				width: 100%;
 				height: 70px;
@@ -143,11 +146,10 @@
 				top: 0;
 				background-color: $mainDarkColor;
 			}
-			transition: left 0.3s ease 0s;
 			.menu-open & {
 				left: 0;
-				&::before{
-					content:'';
+				&::before {
+					content: "";
 					left: 0;
 				}
 			}
@@ -463,6 +465,10 @@
 		display: flex;
 		gap: rem(10);
 		justify-content: space-between;
+		@media (max-width: $tablet) {
+			flex-direction: column;
+			row-gap: rem(25);
+		}
 	}
 	// .menu-catalog__item
 	&__item {
@@ -471,13 +477,15 @@
 	&__link {
 		cursor: pointer;
 		display: flex;
-		justify-content: center;
-		align-items: center;
-		text-align: center;
-		min-height: rem(70);
 		position: relative;
-		padding: 0px rem(10);
 		transition: color 0.3s ease 0s;
+		@media (min-width: $tablet) {
+			justify-content: center;
+			align-items: center;
+			text-align: center;
+			min-height: rem(70);
+			padding: 0px rem(10);
+		}
 		&::after {
 			content: "";
 			opacity: 0;
@@ -506,6 +514,9 @@
 				visibility: visible;
 			}
 		}
+		@media (max-width: $tablet) {
+			@include adaptiv-value("font-size", 30, 20, 992, 320, 1);
+		}
 	}
 	// .menu-catalog__sub-menu
 	&__sub-menu {
@@ -514,6 +525,13 @@
 		top: 100%;
 		background-color: $mainDarkColor;
 	}
+	&__back {
+		display: none;
+		@media (max-width: $tablet) {
+			display: inline-flex;
+			align-items: center;
+		}
+	}
 	@media (max-width: $tablet) {
 		position: fixed;
 		top: 0;
@@ -521,6 +539,13 @@
 		width: 100%;
 		height: 100%;
 		overflow: auto;
+		background-color: $mainDarkColor;
+		padding: rem(100) rem(15) rem(50) rem(15);
+		transition: left 0.3s ease 0s;
+		.catalog-open & {
+			left: 0;
+			z-index: 6;
+		}
 	}
 }
 .sub-menu-catalog {
@@ -608,7 +633,7 @@
 		width: 40px;
 		height: 22.5px;
 		cursor: pointer;
-		z-index: 5;
+		z-index: 10;
 		span,
 		&::before,
 		&::after {
