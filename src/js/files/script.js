@@ -9,8 +9,8 @@ document.addEventListener("click", documentActions);
 const menuBlocks = document.querySelectorAll('.sub-menu-catalog__block');
 if (menuBlocks.length) {
 	menuBlocks.forEach(menuBlock => {
-		const menuBlocksItems = menuBlock.querySelectorAll('.sub-menu-catalog__link-category').length;
-		menuBlock.classList.add(`sub-menu-catalog__block_${menuBlocksItems}`);
+		const menuBlockItems = menuBlock.querySelectorAll('.sub-menu-catalog__category').length;
+		menuBlock.classList.add(`sub-menu-catalog__block_${menuBlockItems}`);
 	});
 }
 
@@ -44,4 +44,11 @@ function documentActions(e) {
 		document.querySelector('._sub-menu-open') ? document.querySelector('._sub-menu-open').classList.remove('_sub-menu-open') : null;
 		e.preventDefault();
 	}
+
+	if (targetElement.closest('.sub-menu-catalog__back')) {
+		document.querySelector('._sub-menu-active') ? document.querySelector('._sub-menu-active').classList.remove('_sub-menu-active') : null;
+		document.querySelector('._sub-menu-open') ? document.querySelector('._sub-menu-open').classList.remove('_sub-menu-open') : null;
+		e.preventDefault();
+	}
+
 }
